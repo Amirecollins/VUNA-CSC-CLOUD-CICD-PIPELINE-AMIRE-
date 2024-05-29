@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NACOSS Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #556B2F; /* Swamp green */
+            color: white;
+            width: 200px;
+            padding: 15px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: -200px;
+            height: 100%;
+            transition: left 0.3s;
+        }
+
+        .sidebar.visible {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+            margin-left: 200px;
+            width: calc(100% - 200px);
+            transition: margin-left 0.3s;
+        }
+
+        .main-content.collapsed {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        .main-content h1 {
+            color: #000000; /* Deep black */
+        }
+
+        .payment-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .payment-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .payment-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .payment-form button {
+            background-color: #556B2F; /* Swamp green */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .payment-form button:hover {
+            background-color: #6B8E23; /* Slightly lighter swamp green */
+        }
+
+        .menu-button {
+            background-color: #556B2F; /* Swamp green */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .menu-button:hover {
+            background-color: #6B8E23; /* Slightly lighter swamp green */
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+       
+        <br>
+        <br>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Payment</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+    <div class="main-content" id="mainContent">
+        <button class="menu-button" id="menuButton">☰ Menu</button>
+        <center><h1>NACOSS Payment Portal</h1></center>
+        <form id="paymentForm" class="payment-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="matric">Matric Number:</label>
+            <input type="text" id="matric" name="matric" required>
+            
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required>
+            
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+
+    <script>
+        const menuButton = document.getElementById('menuButton');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+
+        menuButton.addEventListener('click', function() {
+            sidebar.classList.toggle('visible');
+            mainContent.classList.toggle('collapsed');
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const matric = document.getElementById('matric').value;
+            const amount = document.getElementById('amount').value;
+
+            alert(`Payment Details:\nName: ${name}\nMatric Number: ${matric}\nAmount: ${amount}`);
+        });
+    </script>
+</body>
+</html>
